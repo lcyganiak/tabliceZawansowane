@@ -222,3 +222,39 @@ class NewTax {
 const nowyPodatek = new NewTax('Kastralny', 19)
 console.log(nowyPodatek.nazwa)
 console.log(nowyPodatek.opis)
+
+
+
+// zadani dodatkowe Z linku 
+// https://codesandbox.io/s/array-prototype-wnoel?file=/src/index.js
+//1 zwróć tablicę z nazwami filmów, dłuższych niż 120 minut (runningTimeInMinutes klucz z minutami )
+//2 zwróć tablice z nazwami filmów które zdobyły nagrodę (wonAnyAwards: )
+
+
+//zad 1 
+const dluzszeNiz120 = movies.filter(item => {
+    return item.runningTimeInMinutes > 120
+})
+
+
+console.log(dluzszeNiz120)
+
+const sameTytyly = dluzszeNiz120.map(item => item.name)
+
+console.log(sameTytyly)
+
+// rowiązanie jednolinikowe 
+const jedolinikowe =  movies.filter(item => item.runningTimeInMinutes > 120).map(item => item.name)
+
+// rozwiązanie z pętlą 
+
+let tytuly = []
+
+for(let i =0 ; i < movies.length; i++) {
+  
+    if(movies[i].runningTimeInMinutes > 120 ) {
+        console.log(movies[i].name, 'jestem numerm', i)
+        tytuly.push(movies[i].name)
+    }
+}
+console.log(tytuly)
