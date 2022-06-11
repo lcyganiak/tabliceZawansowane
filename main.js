@@ -84,6 +84,8 @@ const movies = [
 
 
 // zadanie 1
+//Zwróć tablice w której wszystkie nazwy klubów pisne sa dużymi literami.
+
 
 // rozwiązanie dobre ale nie wydajne 
 const zad1 = tablica.toString().toUpperCase().split(',') 
@@ -98,7 +100,7 @@ const zad1Trener = tablica.map(item => {
 const zad1TrenerKrotszyZapis = tablica.map(item => item.toUpperCase())
 
 // zadanie 2 
-
+//Zwróć tablice, z tymi tymi klubami któych nazwa jest dłuższ niż 5 litery
 const zad2 = tablica.filter(item => {
     if(item.length > 5) {
         return item
@@ -106,7 +108,8 @@ const zad2 = tablica.filter(item => {
 })
 
 // zad3 
-
+// 3. napisz funkcję która bedzie sprawdzać czy podany klub wystepuję w tablicy, jezeli klubu nie mam w tablicy to go dodajemy
+// np. function czyJest(fraza) {}
 function czyJest(club) {
 
     const isClub = tablica.find(currentValue => currentValue === club)
@@ -115,7 +118,7 @@ function czyJest(club) {
         return tablica
     } else {
         console.log ('the club has been added')
-        return tablica.unshift (club)
+        return tablica.unshift(club)
     }
 }
 
@@ -145,4 +148,77 @@ tablica.map(item => item.length > 5 ? item.toLowerCase() : item.toUpperCase())
  //                                 warunek jest prawdą  warunek jest fałszem
 
 
- 
+
+
+ // objekty 
+ const obj = {
+    name: "Jan",
+    sName: 'Kowalski',
+    age: 50,
+    cars: [ 'Opel', "Audi" ],
+  }
+
+  // zad1 napisz funkcję która zwróci liczbę key w obiekcie. Funkcja z paramtrem, tak żeby mozna było sprawdzić w przyszłości dowolny Objekt.
+
+  function ileKluczy(parametr) {
+      const keys = Object.keys(parametr) // zwraca tablice z nazwami kluczy ['name', 'sName', 'age', 'cars']
+      const liczbaKluczy = keys.length // zwraca długośc tablicy czyli 4
+      return liczbaKluczy
+
+    // return Object.keys(parametr).length  to samo w jedej lini
+    
+  }
+
+  ileKluczy(obj)
+
+  // zad 2 
+  // funkcja która wypiszę w tablicy typy danych poszczególnych kluczy, wynikiem ma być w przypdku powuższego obiektu tablica [string, string, number, array]
+
+
+  let tablicaKluczy = []
+// rozwiązanie z forEachem
+  function wartosciKluczy(parametr) {
+    const keys = Object.keys(parametr) // zwraca tablice z nazwami kluczy ['name', 'sName', 'age', 'cars']
+    console.log('tablica kluczy', keys)
+    keys.forEach(item => {
+        tablicaKluczy.push( typeof obj[item])
+    })
+  }
+wartosciKluczy(obj)
+console.log('wynik zadani 2', tablicaKluczy)
+
+
+// rozwiązanie z map 
+// błednie zwróci same stringi 
+// function wartosciKluczyZMap(paramert) {
+//     const keys = Object.keys(paramert) // zwraca tablice z nazwami kluczy ['name', 'sName', 'age', 'cars']
+//     return keys.map(item => typeof item)
+// }
+
+// const wynik = wartosciKluczyZMap(obj)
+// console.log('wynik zadani 2 z map', wynik)
+
+// zad 3 Stwórz class NewTax która za parametry przyjmie , nazwę podatku , wartośc podatku, dodatkowo jeden geter z wypisnanym " Od 1 stycznia wchodzi nowy podatek "tu nazwa podatku " w wyskokości "wartości podatku ". Pozdrrawiam Mateusz M", oraz jeden set zminieający wartości podatku
+
+
+class NewTax {
+    constructor(nazwa, wartosc) {
+        this.nazwa = nazwa;
+        this.wartosc = wartosc
+    }
+    get opis() {
+      //  return `Od 1 stycznia wchodzi nowy podatek  ${this.nazwa} w wyskokości ${this.wartosc}. Pozdrrawiam Mateusz M`
+        return 'Od 1 stycznia wchodzi nowy podatek' + ' ' + this.nazwa + ' ' + ' w wyskokości' + ' ' + this.wartosc + ' '  + '. Pozdrrawiam Mateusz M' 
+    }
+    set nowaWartosc(val) {
+        // if(val < 20) {
+        //     console.log("Za mama wartości podatku") 
+        // } else {
+        //     this.wartosc = val
+        // }
+        this.wartosc = val< 20 ? "Za mama wartości podatku" : val
+    }
+}
+const nowyPodatek = new NewTax('Kastralny', 19)
+console.log(nowyPodatek.nazwa)
+console.log(nowyPodatek.opis)
